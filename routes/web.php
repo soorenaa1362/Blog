@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Article;
+
 // use App\Http\Controllers\Category\CategoryController;
 
 /*
@@ -56,7 +58,7 @@ Route::prefix('/admin')->group(function(){
 
     // Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
 
-    Route::get('/articles', [ArticleController::class, 'index'])->name('admin.articles.index');
+    // Route::get('/articles', [ArticleController::class, 'index'])->name('admin.articles.index');
 });
 
 
@@ -69,4 +71,14 @@ Route::prefix('/admin/categories')->group(function(){
     Route::get('/show/{category}', [CategoryController::class, 'show'])->name('admin.categories.show');
     Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('admin.categories.edit');
     Route::put('/update/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+});
+
+
+Route::prefix('/admin/articles')->group(function(){
+    Route::get('/', [ArticleController::class, 'index'])->name('admin.articles.index');
+    Route::get('/create', [ArticleController::class, 'create'])->name('admin.articles.create');
+    Route::post('/store', [ArticleController::class, 'store'])->name('admin.articles.store');
+    Route::get('/edit/{article}', [ArticleController::class, 'edit'])->name('admin.articles.edit');
+    Route::put('/update/{article}', [ArticleController::class, 'update'])->name('admin.articles.update');
+    Route::get('/destroy/{article}', [ArticleController::class, 'destroy'])->name('admin.articles.destroy');
 });
