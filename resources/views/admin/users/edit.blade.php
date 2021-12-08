@@ -30,7 +30,7 @@
                                 </div>
                                 
                                 <div class="col-md-4">
-                                    <button class="btn btn-primary">ذخیره</button>
+                                    <button type="submit" class="btn btn-primary">ذخیره</button>
                                 </div>
                             </div>
                         </form>

@@ -14,17 +14,28 @@
 <body>
     <div class="container p-5 mt-4" style="direction: rtl;">   
         <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-5 mx-auto">
                 <div class="card shadow p-3 mb-5 bg-body rounded">
-                    <h6 class="text-center">ورود</h6><hr>
+                    <h6 class="alert alert-primary text-center">ورود</h6> 
                     <div class="card-body">
-                        <form action="" method="post" class="form-group">
+                        <form action="{{ route('login') }}" method="post" class="form-group">
                             @csrf
+                            
                             <label for="mobile" class="mb-1">موبایل</label>
-                            <input type="text" name="mobile" class="form-control mb-2">
+                            <input type="text" name="mobile" value="{{ old('mobile') }}"
+                            class="form-control mb-2 @error('mobile') is-invalid @enderror">
+                            @error('mobile')
+                                <span style="color: red;">{{ $message }}</span>
+                                <br>
+                            @enderror
                             
                             <label for="password" class="mb-1">رمز عبور</label>
-                            <input type="password" name="password" class="form-control mb-2">
+                            <input type="password" name="password"
+                            class="form-control mb-2 @error('password') is-invalid @enderror">
+                            @error('password')
+                                <span style="color: red;">{{ $message }}</span>
+                                <br>
+                            @enderror 
                             
                             <button class="btn btn-primary mt-3">ورود</button>
                         </form>

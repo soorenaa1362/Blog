@@ -48,4 +48,10 @@ class LoginController extends Controller
     //     $path = $user->isAdmin ? 'dashboard' : '/';
     //     return redirect($path);
     // }
+
+
+    public function showLoginForm()
+    {
+        return view('login.login');
+    }
 }
