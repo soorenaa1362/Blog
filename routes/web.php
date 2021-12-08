@@ -9,6 +9,7 @@ use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\UserController;
 
 // use App\Http\Controllers\Category\CategoryController;
 
@@ -33,6 +34,14 @@ Route::get('/', [SiteController::class, 'index'])->name('site.index');
 // Admin :
 Route::middleware(['auth', 'checkrole'])->prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::prefix('users')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
+        Route::get('/edit/{user}', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/update/{user}', [UserController::class, 'update'])->name('admin.users.update'); 
+        Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    });
+    
 
     Route::prefix('categories')->group(function(){
         Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');

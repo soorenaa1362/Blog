@@ -18,15 +18,38 @@ class UserController extends Controller
     }
 
 
-    public function edit($user_id)
+    public function edit(User $user)
     {
-        $user = User::find($user_id);
         return view('admin.users.edit', compact('user'));
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        dd($request->all());
+        $request->validate([
+            'name' => 'required|max:50',
+            'mobile' => 'required|numeric',
+        ]);
+
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+        $user->role = $request->role;
+        $user->status = $request->status;
+        $user->save();
+        
+        $msg = 'کاربر مورد نظر با موفقیت ویرایش شد.';
+        return redirect(route('admin.users.index'))->with('success', $msg);
+
     }
+
+
+
+    public function destroy(User $user)
+    {
+        User::destory($user->id);
+        $msg = "کاربر مورد نظر با موفقیت حذف شد.";
+        return redirect(route('admin.users.index'))->with('warning', $msg);
+    }
+
+
 }
