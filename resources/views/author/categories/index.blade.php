@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('author.layouts.master')
 
 @section('content')
 <div class="card">
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">افزودن دسته بندی</div>
                     <div class="card-body">
-                        <form action="{{ route('admin.categories.store') }}" method="post" class="form-group">
+                        <form action="{{ route('author.categories.store') }}" method="post" class="form-group">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
@@ -40,14 +40,10 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="active" class="mb-1">وضعیت</label>
-                                    <select name="active" class="form-control @error('active') is-invalid @enderror">
-                                        <option value="" selected>----</option>
+                                    <select name="active" class="form-control">
                                         <option value="0">غیرفعال</option>
                                         <option value="1">فعال</option>
                                     </select>
-                                    @error('active')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>  
                                 <div class="col-md-4">
                                     <button class="btn btn-primary">ذخیره</button>
@@ -65,7 +61,6 @@
                             <thead class="text-center">
                                 <tr>
                                     <th>#</th>
-                                    <th>آیدی</th>
                                     <th>عنوان</th>
                                     <th>نام مستعار</th>
                                     <th>وضعیت</th>
@@ -73,27 +68,23 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @foreach ($categories as $key=>$category )
+                                @foreach($categories as $key => $category)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $category->id }}</td>
                                         <td>{{ $category->title }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>
                                             @if ($category->active == 0)
-                                                <span class="text-danger">غیر فعال</span>
+                                                <span class="text-danger">غیرفعال</span>
                                             @else
                                                 <span class="text-success">فعال</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.categories.show', ['category' => $category->id]) }}">
-                                                <i class="fas fa-file-alt"></i>
-                                            </a>
-                                            <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}">
+                                            <a href="{{ route('author.categories.edit', ['category'=>$category->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.categories.destroy', ['category' => $category->id]) }}">
+                                            <a href="">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

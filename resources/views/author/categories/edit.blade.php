@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('author.layouts.master')
 
 @section('content')
 <div class="card">
@@ -53,7 +53,7 @@
                                 </div>                                
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">ویرایش</button>
-                                    <a href="{{ route('admin.categories.index') }}" class="btn btn-success">برگشت به لیست</a>
+                                    <a href="{{ route('author.categories.index') }}" class="btn btn-success">برگشت به لیست</a>
                                 </div>
                             </div>
                         </form>

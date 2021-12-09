@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('author.layouts.master')
 
 @section('css')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
@@ -27,13 +27,12 @@
                 <div class="card">
                     <div class="card-header">ایجاد مطلب جدید</div>
                     <div class="card-body">
-                        <form action="{{ route('admin.articles.update', ['article'=>$article->id]) }}" method="post" class="form-group">
+                        <form action="{{ route('admin.articles.store') }}" method="post" class="form-group">
                             @csrf
-                            @method('put')
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="title" class="mb-1">عنوان</label>
-                                    <input type="text" name="title" value="{{ $article->title }}"
+                                    <input type="text" name="title"
                                     class="form-control @error('title') is-invalid @enderror">
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
@@ -41,7 +40,7 @@
                                 </div>  
                                 <div class="col-md-3 mb-2">
                                     <label for="slug" class="mb-1">نام مستعار</label>
-                                    <input type="text" name="slug" value="{{ $article->slug }}"
+                                    <input type="text" name="slug"
                                     class="form-control @error('slug') is-invalid @enderror">
                                     @error('slug')
                                         <span class="text-danger">{{ $message }}</span>
@@ -52,14 +51,7 @@
                                     <select id="choices-multiple-remove-button" 
                                     placeholder="انتخاب دسته بندی" name="categories[]" multiple>
                                         @foreach ($categories as $cat_id => $cat_title)
-                                            <option value="{{ $cat_id }}"
-                                                <?php 
-                                                    if(in_array($cat_id, $article->categories->pluck('id')->toArray()))
-                                                        echo 'selected'
-                                                ?>
-                                            >
-                                                {{ $cat_title }}
-                                            </option>
+                                            <option value="{{ $cat_id }}">{{ $cat_title }}</option>
                                         @endforeach                                        
                                     </select>
                                     @error('categories')
@@ -69,12 +61,9 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="status" class="mb-1">وضعیت</label>
                                     <select name="status" class="form-control @error('status') is-invalid @enderror">
-                                        <option value="0" <?php if($article->status == 0) echo 'selected'; ?> >                                            
-                                            منتشر نشده
-                                        </option>
-                                        <option value="1" <?php if($article->status == 1) echo 'selected'; ?> >
-                                            منتشر شده
-                                        </option>
+                                        <option value="">-------</option>
+                                        <option value="0">منتشر نشده</option>
+                                        <option value="1">منتشر شده</option>
                                     </select>
                                     @error('status')
                                         <span class="text-danger">{{ $message }}</span>
@@ -82,9 +71,7 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="text" class="mb-1">توضیحات</label>
-                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror">
-                                        {{ $article->text }}
-                                    </textarea>
+                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror"></textarea>
                                 </div>
                                 @error('text')
                                     <span class="text-danger">{{ $message }}</span>

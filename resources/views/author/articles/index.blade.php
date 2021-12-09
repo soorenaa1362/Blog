@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('author.layouts.master')
 
 @section('content')
 <div class="card">
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         لیست مطالب                        
-                        <a href="{{ route('admin.articles.create') }}" class="btn btn-success">ایجاد مطلب جدید</a>
+                        <a href="" class="btn btn-success">ایجاد مطلب جدید</a>
                     </div>
                     <div class="card-body">
                         <table class="table">

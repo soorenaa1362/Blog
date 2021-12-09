@@ -47,4 +47,10 @@ class User extends Authenticatable
         'status' => 1,
         'role' => 1,
     ];
+
+
+    public function Article()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

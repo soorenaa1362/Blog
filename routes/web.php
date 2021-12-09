@@ -4,25 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\UserController;
-
-// use App\Http\Controllers\Category\CategoryController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Author\AuthorController;
 
 Auth::routes();
 
@@ -51,6 +39,7 @@ Route::middleware(['auth', 'checkrole'])->prefix('admin')->group(function(){
         Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('admin.categories.edit');
         Route::put('/update/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
     });
+
     
     Route::prefix('articles')->group(function(){
         Route::get('/', [ArticleController::class, 'index'])->name('admin.articles.index');
@@ -69,8 +58,25 @@ Route::get('/profile/edit/{user}', [ProfileController::class, 'edit'])->name('pr
 Route::post('/profile/update/{user}', [ProfileController::class, 'update'])->name('profile.update'); 
 
 
+// Author :
 
+Route::middleware(['auth'])->prefix('author')->group(function(){
+    Route::get('dashboard', [AuthorController::class, 'index'])->name('author.dashboard');
+    
+    Route::prefix('/categories')->group(function(){
+        Route::get('/', [App\Http\Controllers\Author\CategoryController::class, 'index'])
+            ->name('author.categories.index');
+        Route::post('/store', [App\Http\Controllers\Author\CategoryController::class, 'store'])
+            ->name('author.categories.store');
+        Route::get('/edit/{category}', [App\Http\Controllers\Author\CategoryController::class, 'edit'])
+            ->name('author.categories.edit');
+    });
 
+    Route::prefix('articels')->group(function(){
+        Route::get('/', [App\Http\Controllers\Author\ArticleController::class, 'index'])
+            ->name('author.articles.index');
+    });
+}); 
 
 
 

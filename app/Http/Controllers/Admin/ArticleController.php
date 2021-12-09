@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -17,23 +19,25 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('admin.articles.create');
+        // $categories = Category::all()->pluck('title', 'id');
+        $categories = Category::where('active', 1)->pluck('title', 'id');
+        return view('admin.articles.create', compact('categories'));
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:articles|max:50',
+            'title' => 'required|max:50',
+            'slug' => 'required|unique:articles|max:20',
+            'status' => 'required',
+            'categories' => 'required',
         ]);
 
-        $article = new Article([
-            'title' => $request->title,
-            'text' => $request->text,
-            'active' => $request->active,
-        ]);
-        $article->save();
-        
+        $article = new Article;
+        $article = $article->create($request->all());
+        $article->Categories()->attach($request->categories);
+
         $msg = "مطلب جدید با موفقیت ایجاد شد.";
         return redirect(route('admin.articles.index'))->with('success', $msg);        
     }
@@ -42,7 +46,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $article = Article::find($article->id);
-        return view('admin.articles.edit', compact('article'));
+        $categories = Category::where('active', 1)->pluck('title', 'id');
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
 
@@ -50,16 +55,14 @@ class ArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|max:50',
+            'slug' => 'required|max:20',
         ]);
 
-        $article->update([
-            'title' => $request->title,
-            'active' => $request->active,
-            'text' => $request->text,
-        ]);
+        $article->update($request->all());
+        $article->Categories()->sync($request->categories);
 
-        $msg = "مطلب با موفقیت ویرایش شد.";
-        return redirect(route('admin.articles.index'))->with('success', $msg);
+        $msg = "مطلب جدید با موفقیت ایجاد شد.";
+        return redirect(route('admin.articles.index'))->with('success', $msg);     
     }
 
 

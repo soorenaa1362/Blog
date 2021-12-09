@@ -37,7 +37,13 @@
                                 @foreach ($users as $key=>$user )
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>
+                                            @if($user->id == Auth::user()->id)
+                                                <span class="text-primary">{{ $user->name }} (خودم)</span>
+                                            @else   
+                                                {{ $user->name }}
+                                            @endif
+                                        </td>
                                         <td>{{ $user->mobile }}</td>
                                         <td>
                                             @if($user->role == 1)    
@@ -59,7 +65,8 @@
                                             <a href="{{ route('admin.users.edit', ['user'=>$user->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.users.destroy', ['user'=>$user->id]) }}">
+                                            <a href="{{ route('admin.users.destroy', ['user'=>$user->id]) }}"
+                                            onclick="return confirm('آیا از حذف این کاربر مطمئن هستید؟')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

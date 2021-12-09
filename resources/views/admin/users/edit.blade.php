@@ -46,7 +46,10 @@
                                     </select>
                                 </div>                                
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">ویرایش</button>
+                                    <button type="submit" class="btn btn-primary">ویرایش</button>                                    
+                                    <a href="{{ route('admin.users.index') }}" class="btn btn-warning">
+                                        انصراف
+                                    </a>
                                 </div>
                             </div>
                         </form>

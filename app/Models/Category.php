@@ -13,7 +13,13 @@ class Category extends Model
 
     protected $fillable = [
         'title',
-        'description',
+        'slug',
         'active',
     ];
+
+
+    public function Articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }

@@ -20,6 +20,7 @@ class CheckRole
         if (Auth::user()->role == 3) {
             return $next($request);
         }
+
         return back();
     }
 }

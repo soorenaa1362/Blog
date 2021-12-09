@@ -166,5 +166,8 @@ return [
         'title'                 => 'عنوان',
         'username'              => 'نام کاربری',
         'year'                  => 'سال',
+        'active'                => 'وضعیت',
+        'status'                => 'وضعیت',
+        'categories'            => 'دسته بندی'
     ],
 ];

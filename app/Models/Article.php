@@ -12,8 +12,27 @@ class Article extends Model
     protected $table = "articles";
 
     protected $fillable = [
-        'title',        
+        'title', 
+        'slug',
         'text',
-        'active',
+        'status',
+        'user_id'
     ];
+
+    protected $attributes = [
+        'hit' => 1,
+    ];
+
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function Categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }

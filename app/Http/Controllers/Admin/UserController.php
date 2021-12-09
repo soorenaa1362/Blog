@@ -12,8 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', '!=', $user_id)->get();
+        // $user_id = Auth::user()->id;
+        // $users = User::where('id', '!=', $user_id)->get();
+        $users = User::orderBy('id', 'ASC')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -46,10 +47,16 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        User::destory($user->id);
+        // User::destory($user->id);
+        $user->delete();
         $msg = "کاربر مورد نظر با موفقیت حذف شد.";
         return redirect(route('admin.users.index'))->with('warning', $msg);
     }
 
+
+    public function status(User $user)
+    {
+
+    }
 
 }
