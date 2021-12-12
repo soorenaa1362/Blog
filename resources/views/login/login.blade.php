@@ -37,7 +37,16 @@
                                 <br>
                             @enderror 
                             
-                            <button class="btn btn-primary mt-3">ورود</button>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <button class="btn btn-primary mt-3">ورود</button>
+                                </div>
+                                <div class="col-md-5 mt-4">
+                                    <a href="{{ route('register') }}">
+                                        <span class="text-primary">میخواهم ثبت نام کنم</span>
+                                    </a>
+                                </div>
+                            </div> 
                         </form>
                     </div>
                 </div>

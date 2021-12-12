@@ -62,6 +62,9 @@
                                             @endif
                                         </td>
                                         <td>
+                                            <a href="{{ route('admin.users.show', ['user'=>$user->id]) }}">
+                                                <i class="fas fa-file-alt"></i>
+                                            </a>
                                             <a href="{{ route('admin.users.edit', ['user'=>$user->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>

@@ -44,10 +44,10 @@
                                     <label for="active" class="mb-1">وضعیت</label>
                                     <select name="active" class="form-control">
                                         <option value="0" <?php if($category->active == 0) echo 'selected'; ?> >
-                                            منتشر نشده
+                                            غیر فعال
                                         </option>
                                         <option value="1"<?php if($category->active == 1) echo 'selected'; ?> >
-                                            منتشر شده
+                                            فعال
                                         </option>
                                     </select>
                                 </div>                                

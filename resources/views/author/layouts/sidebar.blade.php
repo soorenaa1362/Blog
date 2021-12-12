@@ -1,15 +1,11 @@
 <div class="card p-2 mb-2">
     <!-- <div class="card-header">منوی اصلی</div> -->
-    <div class="alert alert-primary">منوی اصلی</div>
+    <div class="alert alert-primary">منوی اصلی (پنل نویسنده)</div>
     <div class="card-body">
         <div class="nav">
             <ul>
                 <li class="mb-3">
                     <a href="{{ route('author.dashboard') }}">داشبورد</a>
-                </li>
-
-                <li class="mb-3">
-                    <a href="{{ route('author.categories.index') }}">مدیریت دسته ها</a>
                 </li>
 
                 <li class="mb-3">

@@ -30,7 +30,7 @@
                         <form action="{{ route('admin.articles.store') }}" method="post" class="form-group">
                             @csrf
                             <div class="row">
-                                <div class="col-md-3 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="title" class="mb-1">عنوان</label>
                                     <input type="text" name="title"
                                     class="form-control @error('title') is-invalid @enderror">
@@ -38,7 +38,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>  
-                                <div class="col-md-3 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="slug" class="mb-1">نام مستعار</label>
                                     <input type="text" name="slug"
                                     class="form-control @error('slug') is-invalid @enderror">
@@ -46,7 +46,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="categories" class="mb-1 @error('categories') is-invalid @enderror">دسته بندی</label>
                                     <select id="choices-multiple-remove-button" 
                                     placeholder="انتخاب دسته بندی" name="categories[]" multiple>
@@ -58,20 +58,9 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 mb-2">
-                                    <label for="status" class="mb-1">وضعیت</label>
-                                    <select name="status" class="form-control @error('status') is-invalid @enderror">
-                                        <option value="">-------</option>
-                                        <option value="0">منتشر نشده</option>
-                                        <option value="1">منتشر شده</option>
-                                    </select>
-                                    @error('status')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="text" class="mb-1">توضیحات</label>
-                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror"></textarea>
+                                    <label for="text" class="mb-1">محتوای مطلب</label>
+                                    <textarea name="text" id="ckeditor" class="form-control @error('text') is-invalid @enderror"></textarea>
                                 </div>
                                 @error('text')
                                     <span class="text-danger">{{ $message }}</span>
@@ -79,7 +68,7 @@
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">ثبت</button>
-                                    <a href="{{ route('admin.articles.index') }}" class="btn btn-success">برگشت به لیست</a>
+                                    <a href="{{ route('author.articles.index') }}" class="btn btn-success">برگشت به لیست</a>
                                 </div>
                             </div>
                         </form>
@@ -99,6 +88,10 @@
             renderChoiceLimit:5
         });
     });
+</script>
+
+<script>
+    ClassicEditor.create(document.getElementById('ckeditor'))
 </script>
 
 @endsection

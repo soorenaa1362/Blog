@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -25,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        return view('site.index');
-        // return view('home');
+        $articles = Article::where('status', 1)->orderBy('id', 'DESC')->get();
+        $categories = Category::all();
+        return view('site.index', compact('categories', 'articles'));
     }
 }

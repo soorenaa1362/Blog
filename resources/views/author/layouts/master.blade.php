@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- <link rel="stylesheet" href="{{ asset('css/multiselect.css') }}"> -->
 
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
+
     @yield('css')
     @yield('js')
 

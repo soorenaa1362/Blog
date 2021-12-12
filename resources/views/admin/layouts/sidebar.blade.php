@@ -1,6 +1,6 @@
 <div class="card p-2 mb-2">
     <!-- <div class="card-header">منوی اصلی</div> -->
-    <div class="alert alert-primary">منوی اصلی</div>
+    <div class="alert alert-primary">منوی اصلی (پنل ادمین)</div>
     <div class="card-body">
         <div class="nav">
             <ul>

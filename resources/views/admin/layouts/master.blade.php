@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- My Style -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- <link rel="stylesheet" href="{{ asset('css/multiselect.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/multiselect.css') }}"> -->  
+    <script src="{{ asset('js/ckeditor.js') }}"></script>  
 
     @yield('css')
     @yield('js')
 
-    <title>داشبورد نویسنده</title>
+    <title>داشبورد ادمین</title>
 </head>
 <body>
     <div class="container-fluid p-3">
@@ -59,14 +60,17 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">                                    
+
+                                    <a class="dropdown-item" href="{{ route('profile.edit', [Auth::user()->id]) }}">پروفایل کاربری</a>
+
+                                    <a class="dropdown-item" href="{{ route('site.index') }}">صفحه اصلی</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         خروج
                                     </a>
-
-                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">ورود به پنل مدیریت</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

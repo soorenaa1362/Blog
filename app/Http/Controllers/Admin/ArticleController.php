@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Cviebrock\EloquentSluggable\Sluggable;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ArticleController extends Controller
 {
@@ -29,12 +31,19 @@ class ArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|max:50',
-            'slug' => 'required|unique:articles|max:20',
+            // 'slug' => 'required|unique:articles|max:20',
             'status' => 'required',
             'categories' => 'required',
         ]);
 
         $article = new Article;
+        if(empty($request->slug)){
+            $slug = SlugService::createSlug(Article::class, 'slug', $request->title);
+        }else{
+            $slug = SlugService::createSlug(Article::class, 'slug', $request->slug); 
+        }
+        $request->merge(['slug' => $slug]);
+
         $article = $article->create($request->all());
         $article->Categories()->attach($request->categories);
 
@@ -55,13 +64,13 @@ class ArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|max:50',
-            'slug' => 'required|max:20',
+            // 'slug' => 'required|max:20',
         ]);
 
         $article->update($request->all());
         $article->Categories()->sync($request->categories);
 
-        $msg = "مطلب جدید با موفقیت ایجاد شد.";
+        $msg = "مطلب مورد نظر با موفقیت ویرایش شد.";
         return redirect(route('admin.articles.index'))->with('success', $msg);     
     }
 

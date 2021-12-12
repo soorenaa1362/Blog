@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Models\Post;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Article;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\FrontModels\Category;
 
 class SiteController extends Controller
 {
     public function index()
     {
-        
-        return view('site.index');
+        $categories = Category::all();
+        $articles = Article::where('status', 1)->orderBy('id', 'DESC')->get();
+        return view('site.index', compact('categories', 'articles'));
     }
+
+
 }

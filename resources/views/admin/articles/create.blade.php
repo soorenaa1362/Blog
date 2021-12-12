@@ -62,16 +62,16 @@
                                     <label for="status" class="mb-1">وضعیت</label>
                                     <select name="status" class="form-control @error('status') is-invalid @enderror">
                                         <option value="">-------</option>
-                                        <option value="0">منتشر نشده</option>
-                                        <option value="1">منتشر شده</option>
+                                        <option value="0">در انتظار تایید</option>
+                                        <option value="1">تایید شده</option>
                                     </select>
                                     @error('status')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="text" class="mb-1">توضیحات</label>
-                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror"></textarea>
+                                    <label for="text" class="mb-1">محتوای مطلب</label>
+                                    <textarea name="text" id="ckeditor" class="form-control @error('text') is-invalid @enderror"></textarea>
                                 </div>
                                 @error('text')
                                     <span class="text-danger">{{ $message }}</span>
@@ -99,6 +99,10 @@
             renderChoiceLimit:5
         });
     });
+</script>
+
+<script>
+    ClassicEditor.create(document.getElementById('ckeditor'))
 </script>
 
 @endsection

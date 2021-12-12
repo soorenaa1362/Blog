@@ -48,7 +48,16 @@
                             <input type="password" name="password_confirmation" 
                             class="form-control mb-2">
                             
-                            <button class="btn btn-primary mt-3">ثبت نام</button>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <button class="btn btn-primary mt-3">ثبت نام</button>
+                                </div>
+                                <div class="col-md-5 mt-4">
+                                    <a href="{{ route('login') }}">
+                                        <span class="text-primary">قبلا ثبت نام کرده ام</span>
+                                    </a>
+                                </div>
+                            </div>                            
                         </form>
                     </div>
                 </div>

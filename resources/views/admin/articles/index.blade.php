@@ -43,9 +43,9 @@
                                         <td>{{ $article->slug }}</td>
                                         <td>
                                             @if($article->status==0)
-                                                <span class="text-danger">منتشر نشده</span>
+                                                <span class="text-danger">در انتظار تایید</span>
                                             @else
-                                                <span class="text-success">منتشر شده</span>
+                                                <span class="text-success">تایید شده</span>
                                             @endif
                                         </td>
                                         <td>{{ $article->User->name }}</td>
@@ -60,7 +60,7 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a href="{{ route('admin.articles.destroy', ['article' => $article->id]) }}"
-                                            onclick="confirm('آیا از حذف این مطلب مطمئن هستید ؟')">
+                                            onclick="return confirm('آیا از حذف این مطلب مطمئن هستید ؟')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

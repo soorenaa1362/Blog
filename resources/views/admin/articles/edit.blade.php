@@ -70,10 +70,10 @@
                                     <label for="status" class="mb-1">وضعیت</label>
                                     <select name="status" class="form-control @error('status') is-invalid @enderror">
                                         <option value="0" <?php if($article->status == 0) echo 'selected'; ?> >                                            
-                                            منتشر نشده
+                                            در انتظار تایید
                                         </option>
                                         <option value="1" <?php if($article->status == 1) echo 'selected'; ?> >
-                                            منتشر شده
+                                            تایید شده
                                         </option>
                                     </select>
                                     @error('status')
@@ -81,8 +81,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="text" class="mb-1">توضیحات</label>
-                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror">
+                                    <label for="text" class="mb-1">محتوای مطلب</label>
+                                    <textarea name="text" id="ckeditor" class="form-control @error('text') is-invalid @enderror">
                                         {{ $article->text }}
                                     </textarea>
                                 </div>
@@ -112,6 +112,10 @@
             renderChoiceLimit:5
         });
     });
+</script>
+
+<script>
+    ClassicEditor.create(document.getElementById('ckeditor'))
 </script>
 
 @endsection

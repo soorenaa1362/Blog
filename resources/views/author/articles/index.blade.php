@@ -18,8 +18,8 @@
             <div class="col-md-12 mb-2">
                 <div class="card">
                     <div class="card-header">
-                        لیست مطالب                        
-                        <a href="" class="btn btn-success">ایجاد مطلب جدید</a>
+                        لیست مطالب ایجاد شده توسط : {{ Auth::user()->name }}
+                        <a href="{{ route('author.articles.create') }}" class="btn btn-success">ایجاد مطلب جدید</a>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -29,7 +29,7 @@
                                     <th>عنوان</th>
                                     <th>نام مستعار</th>
                                     <th>وضعیت</th>
-                                    <th>نویسنده</th>
+                                    <th>تاریخ</th>
                                     <th>دسته بندی</th>
                                     <th>تعداد بازدید</th>
                                     <th>عملیات</th>
@@ -43,12 +43,12 @@
                                         <td>{{ $article->slug }}</td>
                                         <td>
                                             @if($article->status==0)
-                                                <span class="text-danger">منتشر نشده</span>
+                                                <span class="text-danger">در انتظار تایید</span>
                                             @else
-                                                <span class="text-success">منتشر شده</span>
+                                                <span class="text-success">تایید شده</span>
                                             @endif
                                         </td>
-                                        <td>{{ $article->User->name }}</td>
+                                        <td>{{ jdate($article->created_at)->format('%Y/%m/%d') }}</td>
                                         <td>
                                             @foreach ($article->categories()->pluck('title') as $category)
                                                 <span class="text-primary">{{ $category }}</span><br>
@@ -56,11 +56,11 @@
                                         </td>
                                         <td>{{ $article->hit }}</td>
                                         <td>
-                                            <a href="{{ route('admin.articles.edit', ['article' => $article->id]) }}">
+                                            <a href="{{ route('author.articles.edit', ['article' => $article->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.articles.destroy', ['article' => $article->id]) }}"
-                                            onclick="confirm('آیا از حذف این مطلب مطمئن هستید ؟')">
+                                            <a href="{{ route('author.articles.destroy', ['article'=>$article->id]) }}"
+                                            onclick="return confirm('آیا از حذف این مطلب مطمئن هستید؟')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

@@ -86,14 +86,12 @@
                                                 <span class="text-success">فعال</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="{{ route('admin.categories.show', ['category' => $category->id]) }}">
-                                                <i class="fas fa-file-alt"></i>
-                                            </a>
+                                        <td>                                            
                                             <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.categories.destroy', ['category' => $category->id]) }}">
+                                            <a href="{{ route('admin.categories.destroy', ['category'=>$category->id]) }}"
+                                            onclick="return confirm('آیا از حذف این کاربر مطمئن هستید؟')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

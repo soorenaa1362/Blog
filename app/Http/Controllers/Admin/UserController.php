@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-
 class UserController extends Controller
 {
     public function index()
@@ -16,6 +15,12 @@ class UserController extends Controller
         // $users = User::where('id', '!=', $user_id)->get();
         $users = User::orderBy('id', 'ASC')->get();
         return view('admin.users.index', compact('users'));
+    }
+
+
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
     }
 
 

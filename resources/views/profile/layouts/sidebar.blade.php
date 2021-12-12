@@ -9,7 +9,7 @@
                 </li>
                 
                 <li class="mb-3">
-                    <a href="">مدیریت کاربران</a>
+                    <a href="{{ route('admin.users.index') }}">مدیریت کاربران</a>
                 </li>
 
                 <li class="mb-3">

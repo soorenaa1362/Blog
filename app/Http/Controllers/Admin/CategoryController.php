@@ -31,7 +31,7 @@ class CategoryController extends Controller
         ]);
 
         $category->save();
-        $msg = "ذخیره دسته بندی جدید با موفقیت انجام شد.";
+        $msg = "دسته بندی جدید با موفقیت ایجاد شد.";
         return redirect()->route('admin.categories.index')->with('success', $msg);
     }
 

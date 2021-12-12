@@ -1,4 +1,12 @@
-@extends('author.layouts.master')
+@extends('admin.layouts.master')
+
+@section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+@endsection
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+@endsection
 
 @section('content')
 <div class="card">
@@ -17,9 +25,9 @@
         <div class="row">
             <div class="col-md-12 mb-2">
                 <div class="card">
-                    <div class="card-header">ویرایش مطلب</div>
+                    <div class="card-header">ایجاد مطلب جدید</div>
                     <div class="card-body">
-                        <form action="{{ route('admin.articles.update', ['article'=>$article->id]) }}" method="post" class="form-group">
+                        <form action="{{ route('author.articles.update', ['article'=>$article->id]) }}" method="post" class="form-group">
                             @csrf
                             @method('put')
                             <div class="row">
@@ -28,7 +36,7 @@
                                     <input type="text" name="title" value="{{ $article->title }}"
                                     class="form-control @error('title') is-invalid @enderror">
                                     @error('title')
-                                        <span style="color: red;">{{ $message }}</span>
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>  
                                 <div class="col-md-4 mb-2">
@@ -36,32 +44,41 @@
                                     <input type="text" name="slug" value="{{ $article->slug }}"
                                     class="form-control @error('slug') is-invalid @enderror">
                                     @error('slug')
-                                        <span style="color: red;">{{ $message }}</span>
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>                              
-                                <div class="col-md-4 mb-2">
-                                    <label for="status" class="mb-1">وضعیت</label>
-                                    <select name="status" class="form-control">
-                                        <option value="0" <?php if($article->status == 0) echo 'selected' ?> >
-                                            منتشر نشده
-                                        </option>
-                                        <option value="1" <?php if($article->status == 1) echo 'selected' ?> >
-                                            منتشر شده
-                                        </option>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categories" class="mb-1 @error('categories') is-invalid @enderror">دسته بندی</label>
+                                    <select id="choices-multiple-remove-button" 
+                                    placeholder="انتخاب دسته بندی" name="categories[]" multiple>
+                                        @foreach ($categories as $cat_id => $cat_title)
+                                            <option value="{{ $cat_id }}"
+                                                <?php 
+                                                    if(in_array($cat_id, $article->categories->pluck('id')->toArray()))
+                                                        echo 'selected'
+                                                ?>
+                                            >
+                                                {{ $cat_title }}
+                                            </option>
+                                        @endforeach                                        
                                     </select>
+                                    @error('categories')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="text" class="mb-1">توضیحات</label>
-                                    <textarea name="text" class="form-control @error('text') is-invalid @enderror">
+                                    <label for="text" class="mb-1">محتوای مطلب</label>
+                                    <textarea name="text" id="ckeditor" class="form-control @error('text') is-invalid @enderror">
                                         {{ $article->text }}
                                     </textarea>
                                 </div>
                                 @error('text')
-                                    <span style="color: red;">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
+                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">ثبت</button>
-                                    <a href="{{ route('admin.articles.index') }}" class="btn btn-success">برگشت به لیست</a>
+                                    <a href="{{ route('author.articles.index') }}" class="btn btn-success">برگشت به لیست</a>
                                 </div>
                             </div>
                         </form>
@@ -71,4 +88,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount:5,
+            searchResultLimit:5,
+            renderChoiceLimit:5
+        });
+    });
+</script>
+
+<script>
+    ClassicEditor.create(document.getElementById('ckeditor'));
+</script>
+
 @endsection

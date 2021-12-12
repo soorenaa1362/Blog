@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('text');            
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->integer('hit')->default(1);
 
             $table->foreignId('user_id');
