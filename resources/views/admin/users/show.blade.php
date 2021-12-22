@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="card">
+<div class="card shadow bg-body rounded">
     <div class="card-body">
         <div class="row">
             <div class="col-md-12 mb-2">

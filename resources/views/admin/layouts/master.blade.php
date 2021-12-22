@@ -15,6 +15,7 @@
     <!-- My Style -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- <link rel="stylesheet" href="{{ asset('css/multiselect.css') }}"> -->  
+    <link rel="stylesheet" href="{{ asset('css/parent.css') }}">
     <script src="{{ asset('js/ckeditor.js') }}"></script>  
 
     @yield('css')
@@ -24,7 +25,7 @@
 </head>
 <body>
     <div class="container-fluid p-3">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -92,5 +93,6 @@
             </div>
         </div>
     </div>
+    @yield('script')
 </body>
 </html>

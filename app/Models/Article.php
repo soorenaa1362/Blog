@@ -37,6 +37,12 @@ class Article extends Model
         return $this->belongsToMany(Category::class);
     }
 
+
+    public function Comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function sluggable(): array
     {
         return [

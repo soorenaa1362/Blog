@@ -1,4 +1,4 @@
-<div class="card p-2 mb-2">
+<div class="card shadow bg-body rounded p-2 mb-2">
     <!-- <div class="card-header">منوی اصلی</div> -->
     <div class="alert alert-primary">منوی اصلی (پنل نویسنده)</div>
     <div class="card-body">

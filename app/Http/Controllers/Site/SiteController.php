@@ -11,7 +11,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('active', 1)->get();
         $articles = Article::where('status', 1)->orderBy('id', 'DESC')->get();
         return view('site.index', compact('categories', 'articles'));
     }

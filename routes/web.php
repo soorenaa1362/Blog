@@ -1,16 +1,20 @@
 <?php
 
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\ExpertController;
 use App\Http\Controllers\Site\SiteController;
-use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Author\AuthorController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Profile\ProfileController;
 
 Auth::routes();
 
@@ -22,9 +26,11 @@ Route::get('/articles/{article}', [App\Http\Controllers\Site\ArticleController::
 // نمایش مطالب مربوط به یک دسته بندی خاص
 Route::get('/categories/{category}', [App\Http\Controllers\Site\CategoryController::class, 'show'])->name('site.categories.show');
 
+Route::post('/store/{article}', [App\Http\Controllers\Site\CommentController::class, 'store'])->name('admin.comments.store');
+
 
 // Admin :
-Route::middleware(['auth', 'checkrole'])->prefix('admin')->group(function(){
+Route::middleware(['auth', 'checkrole', 'checkstatus'])->prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('users')->group(function(){
@@ -53,6 +59,14 @@ Route::middleware(['auth', 'checkrole'])->prefix('admin')->group(function(){
         Route::get('/edit/{article}', [ArticleController::class, 'edit'])->name('admin.articles.edit');
         Route::put('/update/{article}', [ArticleController::class, 'update'])->name('admin.articles.update');
         Route::get('/destroy/{article}', [ArticleController::class, 'destroy'])->name('admin.articles.destroy');
+    });
+
+
+    Route::prefix('comments')->group(function(){
+        Route::get('/', [CommentController::class, 'index'])->name('admin.comments.index');        
+        Route::get('/edit/{comment}', [CommentController::class, 'edit'])->name('admin.comments.edit');
+        Route::put('/update/{comment}', [CommentController::class, 'update'])->name('admin.comments.update');
+        Route::get('/destroy/{comment}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
     });
 
 });
@@ -93,9 +107,19 @@ Route::middleware(['auth'])->prefix('author')->group(function(){
 
 
 
+Route::get('/expert', [ExpertController::class, 'index'])->name('expert.index');
+Route::get('/book', [BookController::class, 'index'])->name('book.index');
+
+Route::get('/accordion', [BookController::class, 'accordion']);
+
+Route::get('tree', [BookController::class, 'tree']);
+
+
+
+Route::get('/test', [TestController::class, 'test'])->name('test');
 
 
 
 
-
-Route::get('/test', [TestController::class, 'index'])->name('test');
+// Route::get('book-tree-view',[BookController::class, 'manageBook']);
+// Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);

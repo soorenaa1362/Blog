@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="card">
+<div class="card shadow bg-body rounded">
     @if (session('success'))
         <div class="alert alert-success m-2">
             {{ session('success') }}
@@ -77,7 +77,7 @@
                                 @enderror
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">ثبت</button>
+                                    <button type="submit" class="btn btn-primary">ویرایش</button>
                                     <a href="{{ route('author.articles.index') }}" class="btn btn-success">برگشت به لیست</a>
                                 </div>
                             </div>

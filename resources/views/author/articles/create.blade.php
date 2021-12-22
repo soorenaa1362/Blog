@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="card">
+<div class="card shadow bg-body rounded">
     @if (session('success'))
         <div class="alert alert-success m-2">
             {{ session('success') }}
@@ -27,7 +27,7 @@
                 <div class="card">
                     <div class="card-header">ایجاد مطلب جدید</div>
                     <div class="card-body">
-                        <form action="{{ route('admin.articles.store') }}" method="post" class="form-group">
+                        <form action="{{ route('author.articles.store') }}" method="post" class="form-group">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4 mb-2">

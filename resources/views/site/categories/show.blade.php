@@ -9,7 +9,7 @@
     @endif        
     <div class="row px-3">
         <div class="col-md-4">
-            <div class="card mb-3">
+            <div class="card shadow bg-body rounded mb-3">
                 <div class="card-header">دسته بندی ها</div>
                 <div class="card-body">
                     <div class="row">
@@ -27,7 +27,7 @@
         <div class="col-md-8">
             @foreach ($articles as $article) 
                 @if ($article->text != null)                                    
-                    <div class="card mb-2">
+                    <div class="card shadow bg-body rounded mb-2">
                         <div class="card-header">{{ $article->title }}</div>  
                         <div class="card-body">
                             <!-- {{ $article->text }}              -->

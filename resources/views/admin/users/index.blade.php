@@ -14,7 +14,7 @@
     </div>
 @endif
 
-<div class="card">
+<div class="card shadow bg-body rounded">
     <!-- <h5 class="mt-3 mx-5">مدیریت کاربران</h5> -->
     <div class="card-body">
         <div class="row">            
@@ -68,10 +68,12 @@
                                             <a href="{{ route('admin.users.edit', ['user'=>$user->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.users.destroy', ['user'=>$user->id]) }}"
-                                            onclick="return confirm('آیا از حذف این کاربر مطمئن هستید؟')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
+                                            @if(Auth::user()->id != $user->id)
+                                                <a href="{{ route('admin.users.destroy', ['user'=>$user->id]) }}"
+                                                onclick="return confirm('آیا از حذف این کاربر مطمئن هستید؟')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,29 +82,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-4 mb-2">
-                <div class="card">
-                    <div class="card-header">ویرایش کاربر</div>
-                    <div class="card-body">                    
-                        <form action="" method="post" class="form-group">
-                            <label for="name" class="mb-1">نام</label>
-                            <input type="text" class="form-control" value="{{ $user->name ?? '' }}" disabled> <br>
-                            
-                            <label for="mobile" class="mb-1">موبایل</label>
-                            <input type="text" class="form-control" value="{{ $user->mobile ?? '' }}" disabled> <br>
-                            
-                            <label for="role" class="mb-1">نقش کاربری</label>
-                            <select name="role" class="form-control">
-                                <option value="1">کاربر عادی</option>
-                                <option value="2">نویسنده</option>
-                                <option value="3">ادمین</option>
-                            </select>
-
-                            <button class="btn btn-success mt-3">ویرایش</button>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>

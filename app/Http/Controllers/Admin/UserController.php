@@ -37,11 +37,17 @@ class UserController extends Controller
             'mobile' => 'required|numeric',
         ]);
 
-        $user->name = $request->name;
-        $user->mobile = $request->mobile;
-        $user->role = $request->role;
-        $user->status = $request->status;
-        $user->save();
+        if(Auth::user()->id != $user->id){
+            $user->name = $request->name;
+            $user->mobile = $request->mobile;
+            $user->role = $request->role;
+            $user->status = $request->status;
+            $user->save();
+        }else{
+            $user->name = $request->name;
+            $user->mobile = $request->mobile;
+            $user->save();
+        }
         
         $msg = 'کاربر مورد نظر با موفقیت ویرایش شد.';
         return redirect(route('admin.users.index'))->with('success', $msg);

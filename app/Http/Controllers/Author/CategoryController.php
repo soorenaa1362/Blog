@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('active', 1)->get();
         return view('author.categories.index', compact('categories'));
     }
 

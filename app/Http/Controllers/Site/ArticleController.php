@@ -12,7 +12,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $article->increment('hit'); 
-        $categories = Category::all();
+        $categories = Category::where('active', 1)->get();
         return view('site.articles.show', compact('categories', 'article'));
     }
 }

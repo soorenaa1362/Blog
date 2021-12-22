@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="card">
+<div class="card shadow bg-body rounded">
     @if (session('success'))
         <div class="alert alert-success m-2">
             {{ session('success') }}
@@ -20,12 +20,11 @@
             {{ session('warning') }}
         </div>
     @endif
-    <!-- <h5 class="mt-3 mx-5">مدیریت دسته ها</h5> -->
     <div class="card-body">
         <div class="row">
             <div class="col-md-12 mb-2">
                 <div class="card">
-                    <div class="card-header">ایجاد مطلب جدید</div>
+                    <div class="card-header">ویرایش مطلب</div>
                     <div class="card-body">
                         <form action="{{ route('admin.articles.update', ['article'=>$article->id]) }}" method="post" class="form-group">
                             @csrf

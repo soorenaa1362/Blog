@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="card">
+<div class="card shadow bg-body rounded">
     @if (session('success'))
         <div class="alert alert-success m-2">
             {{ session('success') }}

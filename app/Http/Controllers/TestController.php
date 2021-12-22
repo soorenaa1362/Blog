@@ -10,4 +10,10 @@ class TestController extends Controller
     {
         dd(auth()->user()->role);
     }
+
+
+    public function test()
+    {
+        return view('bootstrapTree.tree');
+    }
 }
